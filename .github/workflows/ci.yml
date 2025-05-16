@@ -1,7 +1,7 @@
 name: Java Build & Deploy
 
 env:
-  SERVICE_NAME: product
+  SERVICE_REPO_NAME: ${{ github.repository }} # O nome do repo é o mesmo nome utilizado nos repos do ECR.
 
 on:
   push:
@@ -51,13 +51,13 @@ jobs:
 
       - name: Construir a imagem Docker com múltiplas tags
         run: |
-          IMAGE_URI=${{ vars.ECR_REGISTRY }}/${{ env.SERVICE_NAME }}
+          IMAGE_URI=${{ vars.ECR_REGISTRY }}/tech-challenge/${{ env.SERVICE_REPO_NAME }}
           docker build -t $IMAGE_URI:${{ env.TIMESTAMP }} .
           docker tag $IMAGE_URI:${{ env.TIMESTAMP }} $IMAGE_URI:latest
 
       - name: Enviar a imagem para o Amazon ECR
         run: |
-          IMAGE_URI=${{ vars.ECR_REGISTRY }}/${{ env.SERVICE_NAME }}
+          IMAGE_URI=${{ vars.ECR_REGISTRY }}/tech-challenge/${{ env.SERVICE_REPO_NAME }}
           docker push $IMAGE_URI:${{ env.TIMESTAMP }}
           docker push $IMAGE_URI:latest
 
@@ -104,7 +104,7 @@ jobs:
 
       - name: Atualizar imagem no Helm
         run: |
-          IMAGE_URI=${{ vars.ECR_REGISTRY }}/${{ env.SERVICE_NAME }}
+          IMAGE_URI=${{ vars.ECR_REGISTRY }}/tech-challenge/${{ env.SERVICE_REPO_NAME }}
           echo "Deploying image: $IMAGE_URI:latest"
           helm upgrade --install fiap-tech-challenge ./infra \
             --set app.image=$IMAGE_URI:latest
