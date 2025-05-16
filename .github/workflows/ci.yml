@@ -1,7 +1,7 @@
 name: Java Build & Deploy
 
 env:
-  SERVICE_REPO_NAME: fiap-soat-tech-challenge-product-api # O nome do repo é o mesmo nome utilizado nos repos do ECR.
+  SERVICE_REPO_NAME: fiap-soat-tech-challenge-product-api
 
 on:
   push:
