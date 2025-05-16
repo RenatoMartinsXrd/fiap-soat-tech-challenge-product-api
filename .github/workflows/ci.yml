@@ -1,5 +1,8 @@
 name: Java Build & Deploy
 
+env:
+  SERVICE_NAME: product
+
 on:
   push:
     branches:
@@ -30,12 +33,11 @@ jobs:
     name: Building Application
     needs: pre-build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch' # Executa automaticamente na main ou manualmente via botão (workflow_dispatch)
+    if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
-
 
       - name: Definir variáveis de versão
         run: echo "TIMESTAMP=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
@@ -49,19 +51,21 @@ jobs:
 
       - name: Construir a imagem Docker com múltiplas tags
         run: |
-          docker build -t ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:${{ env.TIMESTAMP }} .
-          docker tag ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:${{ env.TIMESTAMP }} ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
+          IMAGE_URI=${{ vars.ECR_REGISTRY }}/${{ env.SERVICE_NAME }}
+          docker build -t $IMAGE_URI:${{ env.TIMESTAMP }} .
+          docker tag $IMAGE_URI:${{ env.TIMESTAMP }} $IMAGE_URI:latest
 
       - name: Enviar a imagem para o Amazon ECR
         run: |
-          docker push ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:${{ env.TIMESTAMP }}
-          docker push ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
+          IMAGE_URI=${{ vars.ECR_REGISTRY }}/${{ env.SERVICE_NAME }}
+          docker push $IMAGE_URI:${{ env.TIMESTAMP }}
+          docker push $IMAGE_URI:latest
 
   deploy:
     name: Deploying Application
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch' # Executa automaticamente na main ou manualmente via botão (workflow_dispatch)
+    if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout do código
@@ -100,7 +104,7 @@ jobs:
 
       - name: Atualizar imagem no Helm
         run: |
-          echo "Deploying image: ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest"
+          IMAGE_URI=${{ vars.ECR_REGISTRY }}/${{ env.SERVICE_NAME }}
+          echo "Deploying image: $IMAGE_URI:latest"
           helm upgrade --install fiap-tech-challenge ./infra \
-            --set app.image=${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
-
+            --set app.image=$IMAGE_URI:latest
