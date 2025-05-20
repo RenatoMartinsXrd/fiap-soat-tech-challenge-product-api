@@ -25,7 +25,8 @@ spring:
       mode: always
 
   flyway:
-    baselineOnMigrate: true
+    enabled: true
+    baseline-on-migrate: true
     locations: classpath:db/migrations
     undo-locations: classpath:db/undos
 
