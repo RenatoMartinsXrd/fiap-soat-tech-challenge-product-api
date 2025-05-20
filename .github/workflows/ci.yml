@@ -35,8 +35,14 @@ jobs:
           distribution: 'corretto'
           java-version: '21'
 
-      - name: Rodar testes e validação de cobertura
-        run: mvn clean test verify
+      - name: Rodar testes com cobertura e saída limpa
+        run: |
+          mvn -B clean verify -Dmaven.test.failure.ignore=false \
+            | tee target/maven-output.log
+
+          echo "::group::Resumo de Testes"
+          grep -E 'Tests run:|BUILD SUCCESS|BUILD FAILURE' target/maven-output.log || true
+          echo "::endgroup::"
 
   pre-build:
     name: Pre Building
