@@ -19,6 +19,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  flyway:
+    baselineOnMigrate: true
+    locations: classpath:db/migrations
+    undo-locations: classpath:db/undos
+
   messages:
     basename: messages
     encoding: UTF-8

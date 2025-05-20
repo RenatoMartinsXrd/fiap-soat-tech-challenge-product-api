@@ -22,7 +22,7 @@ on:
 
 jobs:
   test-java:
-    name: Testar e verificar cobertura
+    name: Testing
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
           java-version: '21'
 
       - name: Rodar testes e validação de cobertura
-        run: mvn clean verify
+        run: mvn clean test verify
 
   pre-build:
     name: Pre Building
