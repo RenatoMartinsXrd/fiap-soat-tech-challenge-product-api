@@ -21,9 +21,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  test-java:
+    name: Testar e verificar cobertura
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+
+      - name: Rodar testes e validação de cobertura
+        run: mvn clean verify
+
   pre-build:
     name: Pre Building
+    needs: test-java
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
