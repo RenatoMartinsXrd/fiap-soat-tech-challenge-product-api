@@ -36,10 +36,10 @@ jobs:
           java-version: '21'
 
       - name: Unit Tests
-        run: mvn clean test
+        run: mvn -B clean test
 
       - name: Coverage
-        run: mvn clean verify
+        run: mvn -B clean verify
 
   pre-build:
     name: Pre Building
