@@ -2,23 +2,12 @@
 # Tech Challenge - Product API
 
 Microserviço responsável pela gestão de produtos da lanchonete digital.
-Este repositório faz parte da solução maior descrita no repositório principal de documentação.
+
+**Observação:** Este repositório é parte da solução de arquitetura de software para o desafio Tech Challenge da Fiap, com outros microsserviços que compõe o sistema da lanchonete.
+
+📚 Para mais detalhes sobre a solução e arquitetura de software completa, consulte nossa documentação [Repositório Overview](https://github.com/RenatoMartinsXrd/fiap-soat-tech-challenge-overview)
 
 ---
-
-## Repositórios do Projeto
-
-##### fiap-soat-tech-challenge-fase-3-infra-terraform:
-https://github.com/RenatoMartinsXrd/fiap-soat-tech-challenge-fase-3-infra-terraform
-
-##### fiap-soat-tech-challenge-fase-3-db-terraform:
-https://github.com/RenatoMartinsXrd/fiap-soat-tech-challenge-fase-3-db-terraform
-
-##### fiap-soat-tech-challenge-fase-3-lambda:
-https://github.com/RenatoMartinsXrd/fiap-soat-tech-challenge-fase-3-identify-customer-lambda
-
-##### fiap-soat-tech-challenge-fase-3-app:
-https://github.com/dequevedo/fiap-soat-tech-challenge-fase-3-app
 
 ## 📦 Tecnologias Utilizadas
 
@@ -87,10 +76,30 @@ Este microserviço adota o padrão **Clean Architecture**, com foco em separaç�
 
 ## 🧪 Testes
 
-> Implementação em andamento.
+Os testes são realizados com **JUnit** e **Mockito** para garantir a qualidade do código.
 
-- Os testes serão escritos com JUnit e Mockito.
-- A cobertura mínima exigida será de **80%**, conforme o desafio.
-- Ao menos um dos fluxos principais será testado com BDD (usando Cucumber ou JBehave, por exemplo).
+### **Execução dos testes**
+
+1. No diretório do repositório, execute o comando Maven para rodar os testes:
+
+   ```bash
+   mvn test
+   ```
+
+2. Para gerar o relatório de cobertura de testes com **Jacoco**, execute:
+
+   ```bash
+   mvn clean verify
+   ```
+
+3. A cobertura mínima exigida é de **80%**.
 
 ---
+
+## 👥 Equipe
+
+- Renato Martins - @RenatoMartinsXrd
+- Daniel Quevedo - @dequevedo
+
+---
+
