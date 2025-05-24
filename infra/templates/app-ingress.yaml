@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress
+  name: fiap-soat-tech-challenge-ingress #Nao incluir o nome do MS pois esse ingress serve pros 4 MS
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
@@ -17,6 +17,27 @@ spec:
                 port:
                   number: 8080
 
+          - path: /customers
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-app
+                port:
+                  number: 8080
+          - path: /orders
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-app
+                port:
+                  number: 8080
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-app
+                port:
+                  number: 8080
           - path: /products
             pathType: Prefix
             backend:
