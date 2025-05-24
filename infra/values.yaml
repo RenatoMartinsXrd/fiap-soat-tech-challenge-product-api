@@ -30,3 +30,26 @@ secrets:
     SPRING_DATASOURCE_USERNAME: "tech_challenge"
     SPRING_DATASOURCE_PASSWORD: "TyH2qEhgnIj41B"
     SPRING_DATASOURCE_DATABASE: "product"
+
+controller:
+  service:
+    type: NodePort
+    nodePorts:
+      http: 30080
+      https: 30443
+    externalTrafficPolicy: Cluster
+
+  ingressClassResource:
+    name: nginx
+    default: false
+
+  metrics:
+    enabled: true
+
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
