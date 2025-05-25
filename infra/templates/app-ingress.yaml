@@ -9,7 +9,8 @@ spec:
   rules:
     - http:
         paths:
-          - path: /actuator/health
+          # ==== Product Service ====
+          - path: /products/actuator/health
             pathType: Prefix
             backend:
               service:
@@ -25,6 +26,15 @@ spec:
                 port:
                   number: 8080
 
+          # ==== Customer Service ====
+          - path: /customers/actuator/health
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-soat-tech-challenge-customer-api-app
+                port:
+                  number: 8080
+
           - path: /customers
             pathType: Prefix
             backend:
@@ -33,11 +43,29 @@ spec:
                 port:
                   number: 8080
 
+          # ==== Order Service ====
+          - path: /orders/actuator/health
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-soat-tech-challenge-order-api-app
+                port:
+                  number: 8080
+
           - path: /orders
             pathType: Prefix
             backend:
               service:
                 name: fiap-soat-tech-challenge-order-api-app
+                port:
+                  number: 8080
+
+          # ==== Payment Service ====
+          - path: /payments/actuator/health
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-soat-tech-challenge-payment-api-app
                 port:
                   number: 8080
 
