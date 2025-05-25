@@ -31,7 +31,7 @@ spec:
               service:
                 name: fiap-soat-tech-challenge-customer-api-app
                 port:
-                  number: 8081
+                  number: 8080
 
           - path: /orders
             pathType: Prefix
@@ -39,7 +39,7 @@ spec:
               service:
                 name: fiap-soat-tech-challenge-order-api-app
                 port:
-                  number: 8082
+                  number: 8080
 
           - path: /payments
             pathType: Prefix
@@ -47,7 +47,7 @@ spec:
               service:
                 name: fiap-soat-tech-challenge-payment-api-app
                 port:
-                  number: 8083
+                  number: 8080
 
 #          - path: /
 #            pathType: Prefix
