@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fiap-soat-tech-challenge-ingress #Nao incluir o nome do MS pois esse ingress serve pros 4 MS
+  name: fiap-soat-tech-challenge-ingress
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
@@ -13,7 +13,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-app
+                name: fiap-soat-tech-challenge-product-api-app
                 port:
                   number: 8080
 
@@ -21,28 +21,31 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-app
+                name: fiap-soat-tech-challenge-customer-api-app
                 port:
                   number: 8080
+
           - path: /orders
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-app
+                name: fiap-soat-tech-challenge-order-api-app
                 port:
                   number: 8080
+
           - path: /payments
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-app
+                name: fiap-soat-tech-challenge-payment-api-app
                 port:
                   number: 8080
+
           - path: /products
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-app
+                name: fiap-soat-tech-challenge-product-api-app
                 port:
                   number: 8080
 
@@ -50,6 +53,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-app
+                name: fiap-soat-tech-challenge-product-api-app
                 port:
                   number: 8080
