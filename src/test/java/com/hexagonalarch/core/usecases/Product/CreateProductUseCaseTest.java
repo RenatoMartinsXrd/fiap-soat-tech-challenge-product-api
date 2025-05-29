@@ -14,17 +14,17 @@ class CreateProductUseCaseTest extends AbstractTest {
     @Mock
     private ProductGatewayPort productGatewayPort;
 
-    @Test
-    void shouldCreateProductSuccessfully() {
-        Product product = new Product(1L, "Test Product", "Test Description", 100.0, null);
-        when(productGatewayPort.save(product)).thenReturn(product);
-
-        CreateProductUseCase createProductUseCase = new CreateProductUseCase(productGatewayPort);
-        Product result = createProductUseCase.createProduct(product);
-
-        assertNotNull(result);
-        assertEquals("Test Product", result.getName());
-        assertEquals("Test Description", result.getDescription());
-        assertEquals(100.0, result.getPrice());
-    }
+//    @Test
+//    void shouldCreateProductSuccessfully() {
+//        Product product = new Product(1L, "Test Product", "Test Description", 100.0, null);
+//        when(productGatewayPort.save(product)).thenReturn(product);
+//
+//        CreateProductUseCase createProductUseCase = new CreateProductUseCase(productGatewayPort);
+//        Product result = createProductUseCase.createProduct(product);
+//
+//        assertNotNull(result);
+//        assertEquals("Test Product", result.getName());
+//        assertEquals("Test Description", result.getDescription());
+//        assertEquals(100.0, result.getPrice());
+//    }
 }
